@@ -35,12 +35,14 @@ namespace SPM.Infrastructure.Data
         public virtual DbSet<SalesOrder> SalesOrder { get; set; }
         public virtual DbSet<SalesReason> SalesReason { get; set; }
         public virtual DbSet<ShipLocation> ShipLocation { get; set; }
+        public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Vendor> Vendor { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=MMS;Integrated Security=True");
             }
         }
@@ -542,6 +544,20 @@ namespace SPM.Infrastructure.Data
                 entity.Property(e => e.LocationName)
                     .IsRequired()
                     .HasMaxLength(60);
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.Property(e => e.UserId).HasColumnName("UserID");
+
+                entity.Property(e => e.PasswordHash).IsRequired();
+
+                entity.Property(e => e.PasswordSalt).IsRequired();
+
+                entity.Property(e => e.Username)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Vendor>(entity =>
