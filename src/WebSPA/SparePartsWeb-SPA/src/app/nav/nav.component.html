@@ -1,16 +1,16 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
   <div class="container">
-    <a class="navbar-brand" href="#">Spare Parts</a>
+    <a class="navbar-brand" [routerLink]="['/home']">Spare Parts</a>
 
     <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Sales</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/products']"  >Products</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Products</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/order']">Orders</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Orders</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/category']">Category</a>
       </li>
     </ul>
 
